@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hrlweibo.dao.VideoMapper" >
+  <resultMap id="BaseResultMap" type="com.hrlweibo.pojo.Video" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="coverimg" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="videotime" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="playnum" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="userid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="tag" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="recommengstr" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="type" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="videourl" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="zannum" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="introduce" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="createtime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, coverimg, videotime, playnum, userid, tag, recommengstr, type, videourl, zannum, 
+    introduce, createtime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from hrl_vedio
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from hrl_vedio
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hrlweibo.pojo.Video" >
+    insert into hrl_vedio (id, coverimg, videotime, 
+      playnum, userid, tag, 
+      recommengstr, type, videourl, 
+      zannum, introduce, createtime
+      )
+    values (#{id,jdbcType=INTEGER}, #{coverimg,jdbcType=VARCHAR}, #{videotime,jdbcType=INTEGER}, 
+      #{playnum,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{tag,jdbcType=VARCHAR}, 
+      #{recommengstr,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{videourl,jdbcType=VARCHAR}, 
+      #{zannum,jdbcType=INTEGER}, #{introduce,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hrlweibo.pojo.Video" >
+    insert into hrl_vedio
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="coverimg != null" >
+        coverimg,
+      </if>
+      <if test="videotime != null" >
+        videotime,
+      </if>
+      <if test="playnum != null" >
+        playnum,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="tag != null" >
+        tag,
+      </if>
+      <if test="recommengstr != null" >
+        recommengstr,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="videourl != null" >
+        videourl,
+      </if>
+      <if test="zannum != null" >
+        zannum,
+      </if>
+      <if test="introduce != null" >
+        introduce,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="coverimg != null" >
+        #{coverimg,jdbcType=VARCHAR},
+      </if>
+      <if test="videotime != null" >
+        #{videotime,jdbcType=INTEGER},
+      </if>
+      <if test="playnum != null" >
+        #{playnum,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="tag != null" >
+        #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="recommengstr != null" >
+        #{recommengstr,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="videourl != null" >
+        #{videourl,jdbcType=VARCHAR},
+      </if>
+      <if test="zannum != null" >
+        #{zannum,jdbcType=INTEGER},
+      </if>
+      <if test="introduce != null" >
+        #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hrlweibo.pojo.Video" >
+    update hrl_vedio
+    <set >
+      <if test="coverimg != null" >
+        coverimg = #{coverimg,jdbcType=VARCHAR},
+      </if>
+      <if test="videotime != null" >
+        videotime = #{videotime,jdbcType=INTEGER},
+      </if>
+      <if test="playnum != null" >
+        playnum = #{playnum,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="tag != null" >
+        tag = #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="recommengstr != null" >
+        recommengstr = #{recommengstr,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="videourl != null" >
+        videourl = #{videourl,jdbcType=VARCHAR},
+      </if>
+      <if test="zannum != null" >
+        zannum = #{zannum,jdbcType=INTEGER},
+      </if>
+      <if test="introduce != null" >
+        introduce = #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hrlweibo.pojo.Video" >
+    update hrl_vedio
+    set coverimg = #{coverimg,jdbcType=VARCHAR},
+      videotime = #{videotime,jdbcType=INTEGER},
+      playnum = #{playnum,jdbcType=INTEGER},
+      userid = #{userid,jdbcType=INTEGER},
+      tag = #{tag,jdbcType=VARCHAR},
+      recommengstr = #{recommengstr,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      videourl = #{videourl,jdbcType=VARCHAR},
+      zannum = #{zannum,jdbcType=INTEGER},
+      introduce = #{introduce,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+  <select id="queryByTypeId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    SELECT
+    <include refid="Base_Column_List"/>
+    from hrl_vedio  where type = #{typeId,jdbcType=BIGINT}
+  </select>
+</mapper>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hrlweibo.dao.ZanMapper" >
+  <resultMap id="BaseResultMap" type="com.hrlweibo.pojo.Zan" >
+    <constructor >
+      <idArg column="zanid" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="weiboid" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="userid" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="tail" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="createtime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    zanid, weiboid, userid,tail,createTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from hrl_zan
+    where zanid = #{zanid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from hrl_zan
+    where zanid = #{zanid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hrlweibo.pojo.Zan" >
+    insert into hrl_zan (zanid, weiboid, userid,tail,createtime
+      )
+    values (#{zanid,jdbcType=BIGINT}, #{weiboid,jdbcType=BIGINT}, #{userid,jdbcType=BIGINT} , #{tail,jdbcType=VARCHAR},now()
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hrlweibo.pojo.Zan" >
+    insert into hrl_zan
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="zanid != null" >
+        zanid,
+      </if>
+      <if test="weiboid != null" >
+        weiboid,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="tail != null" >
+        tail,
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="zanid != null" >
+        #{zanid,jdbcType=BIGINT},
+      </if>
+      <if test="weiboid != null" >
+        #{weiboid,jdbcType=BIGINT},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=BIGINT},
+      </if>
+
+      <if test="tail != null" >
+        #{tail,jdbcType=VARCHAR},
+       </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+
+    </trim>
+  </insert>
+
+
+
+
+
+
+  <select id="selectRecordByUserAndWeiBo"  resultMap="BaseResultMap" parameterType="map">
+    select
+    <include refid="Base_Column_List" />
+    from hrl_zan
+    where userid = #{userid,jdbcType=BIGINT} and weiboid = #{weiboid,jdbcType=BIGINT}
+   </select>
+
+  <select id="queryZanList"  resultMap="BaseResultMap" parameterType="map">
+    select
+    <include refid="Base_Column_List" />
+    from hrl_zan  Order By createtime Desc
+   </select>
+
+</mapper>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hrlweibo.dao.ForwardMapper" >
+  <resultMap id="BaseResultMap" type="com.hrlweibo.pojo.Forward" >
+    <constructor >
+      <idArg column="forwardid" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="userid" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="content" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="createTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    forwardid, userid, content, createTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from hrl_forward
+    where forwardid = #{forwardid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from hrl_forward
+    where forwardid = #{forwardid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hrlweibo.pojo.Forward" >
+    insert into hrl_forward (forwardid, userid, content, 
+      createTime)
+    values (#{forwardid,jdbcType=BIGINT}, #{userid,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hrlweibo.pojo.Forward" >
+    insert into hrl_forward
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="forwardid != null" >
+        forwardid,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="forwardid != null" >
+        #{forwardid,jdbcType=BIGINT},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hrlweibo.pojo.Forward" >
+    update hrl_forward
+    <set >
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where forwardid = #{forwardid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hrlweibo.pojo.Forward" >
+    update hrl_forward
+    set userid = #{userid,jdbcType=BIGINT},
+      content = #{content,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP}
+    where forwardid = #{forwardid,jdbcType=BIGINT}
+  </update>
+
+
+
+  <select id="queryList"  resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    from hrl_forward
+    ORDER BY createTime asc
+  </select>
+
+
+
+
+</mapper>

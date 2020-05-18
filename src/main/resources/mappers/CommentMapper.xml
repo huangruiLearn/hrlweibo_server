@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hrlweibo.dao.CommentMapper">
+  <resultMap id="BaseResultMap" type="com.hrlweibo.pojo.Comment">
+    <constructor>
+      <idArg column="commentid" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="weiboid" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="userid" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="content" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="zannum" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="createTime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="tail" javaType="java.lang.String" jdbcType="VARCHAR" />
+
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    commentid, weiboid, userid, content, zannum, createTime,tail
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from hrl_comment
+    where commentid = #{commentid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from hrl_comment
+    where commentid = #{commentid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hrlweibo.pojo.Comment">
+    insert into hrl_comment (commentid, weiboid, userid,
+      content, zannum, createTime,tail
+      )
+    values (#{commentid,jdbcType=BIGINT}, #{weiboid,jdbcType=BIGINT}, #{userid,jdbcType=BIGINT},
+      #{content,jdbcType=VARCHAR}, #{zannum,jdbcType=INTEGER}, now(), #{tail,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hrlweibo.pojo.Comment">
+    insert into hrl_comment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="commentid != null">
+        commentid,
+      </if>
+      <if test="weiboid != null">
+        weiboid,
+      </if>
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="zannum != null">
+        zannum,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="tail != null">
+        tail,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="commentid != null">
+        #{commentid,jdbcType=BIGINT},
+      </if>
+      <if test="weiboid != null">
+        #{weiboid,jdbcType=BIGINT},
+      </if>
+      <if test="userid != null">
+        #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="zannum != null">
+        #{zannum,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tail != null">
+        #{tail,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hrlweibo.pojo.Comment">
+    update hrl_comment
+    <set>
+      <if test="weiboid != null">
+        weiboid = #{weiboid,jdbcType=BIGINT},
+      </if>
+      <if test="userid != null">
+        userid = #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="zannum != null">
+        zannum = #{zannum,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tail != null">
+        tail = #{tail,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where commentid = #{commentid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hrlweibo.pojo.Comment">
+    update hrl_comment
+    set weiboid = #{weiboid,jdbcType=BIGINT},
+      userid = #{userid,jdbcType=BIGINT},
+      content = #{content,jdbcType=VARCHAR},
+      zannum = #{zannum,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+    tail = #{tail,jdbcType=VARCHAR},
+
+    where commentid = #{commentid,jdbcType=BIGINT}
+  </update>
+
+
+  <select id="queryListByWeiBoId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    from hrl_comment  where weiboid = #{weiboId,jdbcType=BIGINT}
+    ORDER BY createTime asc
+  </select>
+
+
+
+  <select id="queryCommentList"  resultMap="BaseResultMap" parameterType="map">
+    select
+    <include refid="Base_Column_List" />
+    from hrl_comment  Order By createTime Desc
+  </select>
+
+
+
+
+</mapper>

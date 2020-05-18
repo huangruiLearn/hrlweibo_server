@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hrlweibo.dao.FindHotSearchMapper" >
+  <resultMap id="BaseResultMap" type="com.hrlweibo.pojo.FindHotSearch" >
+    <constructor >
+      <idArg column="hotid" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="hotdesc" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="hottype" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="hotread" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="hotattitude" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="hotdiscuss" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="hothost" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="isrecommend" jdbcType="BIT" javaType="java.lang.Boolean" />
+      <arg column="recommendpage" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="recommendpagepostion" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="recommendcoverimg" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    hotid, hotdesc, hottype, hotread, hotattitude, hotdiscuss, hothost, isrecommend, 
+    recommendpage, recommendpagepostion, recommendcoverimg
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from hrl_find_hotsearch
+    where hotid = #{hotid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from hrl_find_hotsearch
+    where hotid = #{hotid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hrlweibo.pojo.FindHotSearch" >
+    insert into hrl_find_hotsearch (hotid, hotdesc, hottype, 
+      hotread, hotattitude, hotdiscuss, 
+      hothost, isrecommend, recommendpage, 
+      recommendpagepostion, recommendcoverimg
+      )
+    values (#{hotid,jdbcType=BIGINT}, #{hotdesc,jdbcType=VARCHAR}, #{hottype,jdbcType=INTEGER}, 
+      #{hotread,jdbcType=BIGINT}, #{hotattitude,jdbcType=VARCHAR}, #{hotdiscuss,jdbcType=BIGINT}, 
+      #{hothost,jdbcType=VARCHAR}, #{isrecommend,jdbcType=BIT}, #{recommendpage,jdbcType=INTEGER}, 
+      #{recommendpagepostion,jdbcType=INTEGER}, #{recommendcoverimg,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hrlweibo.pojo.FindHotSearch" >
+    insert into hrl_find_hotsearch
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="hotid != null" >
+        hotid,
+      </if>
+      <if test="hotdesc != null" >
+        hotdesc,
+      </if>
+      <if test="hottype != null" >
+        hottype,
+      </if>
+      <if test="hotread != null" >
+        hotread,
+      </if>
+      <if test="hotattitude != null" >
+        hotattitude,
+      </if>
+      <if test="hotdiscuss != null" >
+        hotdiscuss,
+      </if>
+      <if test="hothost != null" >
+        hothost,
+      </if>
+      <if test="isrecommend != null" >
+        isrecommend,
+      </if>
+      <if test="recommendpage != null" >
+        recommendpage,
+      </if>
+      <if test="recommendpagepostion != null" >
+        recommendpagepostion,
+      </if>
+      <if test="recommendcoverimg != null" >
+        recommendcoverimg,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="hotid != null" >
+        #{hotid,jdbcType=BIGINT},
+      </if>
+      <if test="hotdesc != null" >
+        #{hotdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="hottype != null" >
+        #{hottype,jdbcType=INTEGER},
+      </if>
+      <if test="hotread != null" >
+        #{hotread,jdbcType=BIGINT},
+      </if>
+      <if test="hotattitude != null" >
+        #{hotattitude,jdbcType=VARCHAR},
+      </if>
+      <if test="hotdiscuss != null" >
+        #{hotdiscuss,jdbcType=BIGINT},
+      </if>
+      <if test="hothost != null" >
+        #{hothost,jdbcType=VARCHAR},
+      </if>
+      <if test="isrecommend != null" >
+        #{isrecommend,jdbcType=BIT},
+      </if>
+      <if test="recommendpage != null" >
+        #{recommendpage,jdbcType=INTEGER},
+      </if>
+      <if test="recommendpagepostion != null" >
+        #{recommendpagepostion,jdbcType=INTEGER},
+      </if>
+      <if test="recommendcoverimg != null" >
+        #{recommendcoverimg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hrlweibo.pojo.FindHotSearch" >
+    update hrl_find_hotsearch
+    <set >
+      <if test="hotdesc != null" >
+        hotdesc = #{hotdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="hottype != null" >
+        hottype = #{hottype,jdbcType=INTEGER},
+      </if>
+      <if test="hotread != null" >
+        hotread = #{hotread,jdbcType=BIGINT},
+      </if>
+      <if test="hotattitude != null" >
+        hotattitude = #{hotattitude,jdbcType=VARCHAR},
+      </if>
+      <if test="hotdiscuss != null" >
+        hotdiscuss = #{hotdiscuss,jdbcType=BIGINT},
+      </if>
+      <if test="hothost != null" >
+        hothost = #{hothost,jdbcType=VARCHAR},
+      </if>
+      <if test="isrecommend != null" >
+        isrecommend = #{isrecommend,jdbcType=BIT},
+      </if>
+      <if test="recommendpage != null" >
+        recommendpage = #{recommendpage,jdbcType=INTEGER},
+      </if>
+      <if test="recommendpagepostion != null" >
+        recommendpagepostion = #{recommendpagepostion,jdbcType=INTEGER},
+      </if>
+      <if test="recommendcoverimg != null" >
+        recommendcoverimg = #{recommendcoverimg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where hotid = #{hotid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hrlweibo.pojo.FindHotSearch" >
+    update hrl_find_hotsearch
+    set hotdesc = #{hotdesc,jdbcType=VARCHAR},
+      hottype = #{hottype,jdbcType=INTEGER},
+      hotread = #{hotread,jdbcType=BIGINT},
+      hotattitude = #{hotattitude,jdbcType=VARCHAR},
+      hotdiscuss = #{hotdiscuss,jdbcType=BIGINT},
+      hothost = #{hothost,jdbcType=VARCHAR},
+      isrecommend = #{isrecommend,jdbcType=BIT},
+      recommendpage = #{recommendpage,jdbcType=INTEGER},
+      recommendpagepostion = #{recommendpagepostion,jdbcType=INTEGER},
+      recommendcoverimg = #{recommendcoverimg,jdbcType=VARCHAR}
+    where hotid = #{hotid,jdbcType=BIGINT}
+  </update>
+
+
+  <select id="queryAllFindHotSearch" resultMap="BaseResultMap"   >
+    select    *  from hrl_find_hotsearch
+  </select>
+
+  <select id="queryFindHotSearchTop" resultMap="BaseResultMap"   >
+    select   *   from hrl_find_hotsearch limit 0,7
+  </select>
+
+  <select id="queryFindHotSearchCenter" resultMap="BaseResultMap"   >
+    select    *  from hrl_find_hotsearch where isrecommend=1
+  </select>
+
+</mapper>

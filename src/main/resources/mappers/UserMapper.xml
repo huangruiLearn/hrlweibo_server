@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hrlweibo.dao.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.hrlweibo.pojo.User" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="username" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="password" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="nick" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="headurl" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="decs" jdbcType="VARCHAR" javaType="java.lang.String" />
+
+       <arg column="gender" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ismember" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="isvertify" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="follow_count" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="fan_count" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, username, password, nick, headurl, decs, gender,ismember,isvertify, follow_count, fan_count, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from hrl_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from hrl_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hrlweibo.pojo.User" >
+    insert into hrl_user (id, username, password,
+    nick, headurl, decs,
+    gender,ismember,isvertify, follow_count, fan_count,
+    create_time)
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+    #{nick,jdbcType=VARCHAR}, #{headurl,jdbcType=VARCHAR}, #{decs,jdbcType=VARCHAR}, #{ismember,jdbcType=VARCHAR}, #{isvertify,jdbcType=VARCHAR},
+    #{gender,jdbcType=VARCHAR}, #{followCount,jdbcType=BIGINT}, #{fanCount,jdbcType=BIGINT},
+    now())
+  </insert>
+  <insert id="insertSelective" parameterType="com.hrlweibo.pojo.User" >
+    insert into hrl_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="nick != null" >
+        nick,
+      </if>
+      <if test="headurl != null" >
+        headurl,
+      </if>
+      <if test="decs != null" >
+        decs,
+      </if>
+
+      <if test="gender != null" >
+        gender,
+      </if>
+      <if test="ismember != null" >
+        ismember,
+      </if>
+      <if test="isvertify != null" >
+        isvertify,
+      </if>
+      <if test="followCount != null" >
+        follow_count,
+      </if>
+      <if test="fanCount != null" >
+        fan_count,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="nick != null" >
+        #{nick,jdbcType=VARCHAR},
+      </if>
+      <if test="headurl != null" >
+        #{headurl,jdbcType=VARCHAR},
+      </if>
+      <if test="decs != null" >
+        #{decs,jdbcType=VARCHAR},
+      </if>
+
+      <if test="gender != null" >
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="ismember != null" >
+        #{ismember,jdbcType=INTEGER},
+
+      </if>
+      <if test="isvertify != null" >
+        #{isvertify,jdbcType=INTEGER},
+      </if>
+      <if test="followCount != null" >
+        #{followCount,jdbcType=BIGINT},
+      </if>
+      <if test="fanCount != null" >
+        #{fanCount,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hrlweibo.pojo.User" >
+    update hrl_user
+    <set >
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="nick != null" >
+        nick = #{nick,jdbcType=VARCHAR},
+      </if>
+      <if test="headurl != null" >
+        headurl = #{headurl,jdbcType=VARCHAR},
+      </if>
+      <if test="decs != null" >
+        decs = #{decs,jdbcType=VARCHAR},
+      </if>
+
+      <if test="gender != null" >
+        gender = #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="ismember != null" >
+        ismember =  #{ismember,jdbcType=INTEGER},
+
+      </if>
+      <if test="isvertify != null" >
+        isvertify =  #{isvertify,jdbcType=INTEGER},
+      </if>
+      <if test="followCount != null" >
+        follow_count = #{followCount,jdbcType=BIGINT},
+      </if>
+      <if test="fanCount != null" >
+        fan_count = #{fanCount,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hrlweibo.pojo.User" >
+    update hrl_user
+    set username = #{username,jdbcType=VARCHAR},
+    password = #{password,jdbcType=VARCHAR},
+    nick = #{nick,jdbcType=VARCHAR},
+    headurl = #{headurl,jdbcType=VARCHAR},
+    decs = #{decs,jdbcType=VARCHAR},
+
+     gender = #{gender,jdbcType=VARCHAR},
+    ismember = #{ismember,jdbcType=INTEGER},
+    isvertify = #{isvertify,jdbcType=INTEGER},
+    follow_count = #{followCount,jdbcType=BIGINT},
+    fan_count = #{fanCount,jdbcType=BIGINT},
+    create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+
+  <update id="updateUserHeadByPrimaryKey" parameterType="map" >
+    update hrl_user  set    headurl = #{headurl}  where id = #{userid}
+  </update>
+
+
+  <update id="updatePersonSignByPrimaryKey" parameterType="map" >
+    update hrl_user  set    decs = #{personsign}  where id = #{userid}
+  </update>
+
+  <update id="updatePersonNickByPrimaryKey" parameterType="map" >
+    update hrl_user  set    nick = #{nick}  where id = #{userid}
+  </update>
+
+
+  <select id="checkUsername" resultType="int" parameterType="string" >
+    select count(1) from hrl_user
+    where username = #{username}
+  </select>
+
+
+
+  <select id="selectLogin" resultMap="BaseResultMap" parameterType="map">
+    SELECT
+    <include refid="Base_Column_List" />
+    from hrl_user
+    where username = #{username}
+    and password = #{password}
+  </select>
+
+
+  <select id="selectAllUser"  resultMap="BaseResultMap">
+    SELECT  <include refid="Base_Column_List" /> from hrl_user
+  </select>
+
+
+
+</mapper>

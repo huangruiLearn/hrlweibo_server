@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hrlweibo.dao.CommentReplyMapper" >
+  <resultMap id="BaseResultMap" type="com.hrlweibo.pojo.CommentReply" >
+    <constructor >
+      <idArg column="crid" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="commentid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="cruserid" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="crcontent" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="crzannum" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="crcreateTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    crid, commentid, cruserid, crcontent, crzannum, crcreateTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from hrl_comment_reply
+    where crid = #{crid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from hrl_comment_reply
+    where crid = #{crid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hrlweibo.pojo.CommentReply" >
+    insert into hrl_comment_reply (crid, commentid, cruserid, 
+      crcontent, crzannum, crcreateTime
+      )
+    values (#{crid,jdbcType=BIGINT}, #{commentid,jdbcType=INTEGER}, #{cruserid,jdbcType=BIGINT}, 
+      #{crcontent,jdbcType=VARCHAR}, #{crzannum,jdbcType=INTEGER}, now()
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hrlweibo.pojo.CommentReply" >
+    insert into hrl_comment_reply
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="crid != null" >
+        crid,
+      </if>
+      <if test="commentid != null" >
+        commentid,
+      </if>
+      <if test="cruserid != null" >
+        cruserid,
+      </if>
+      <if test="crcontent != null" >
+        crcontent,
+      </if>
+      <if test="crzannum != null" >
+        crzannum,
+      </if>
+      <if test="crcreatetime != null" >
+        crcreateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="crid != null" >
+        #{crid,jdbcType=BIGINT},
+      </if>
+      <if test="commentid != null" >
+        #{commentid,jdbcType=INTEGER},
+      </if>
+      <if test="cruserid != null" >
+        #{cruserid,jdbcType=BIGINT},
+      </if>
+      <if test="crcontent != null" >
+        #{crcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="crzannum != null" >
+        #{crzannum,jdbcType=INTEGER},
+      </if>
+      <if test="crcreatetime != null" >
+        #{crcreatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hrlweibo.pojo.CommentReply" >
+    update hrl_comment_reply
+    <set >
+      <if test="commentid != null" >
+        commentid = #{commentid,jdbcType=INTEGER},
+      </if>
+      <if test="cruserid != null" >
+        cruserid = #{cruserid,jdbcType=BIGINT},
+      </if>
+      <if test="crcontent != null" >
+        crcontent = #{crcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="crzannum != null" >
+        crzannum = #{crzannum,jdbcType=INTEGER},
+      </if>
+      <if test="crcreatetime != null" >
+        crcreateTime = #{crcreatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where crid = #{crid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hrlweibo.pojo.CommentReply" >
+    update hrl_comment_reply
+    set commentid = #{commentid,jdbcType=INTEGER},
+      cruserid = #{cruserid,jdbcType=BIGINT},
+      crcontent = #{crcontent,jdbcType=VARCHAR},
+      crzannum = #{crzannum,jdbcType=INTEGER},
+      crcreateTime = #{crcreatetime,jdbcType=TIMESTAMP}
+    where crid = #{crid,jdbcType=BIGINT}
+  </update>
+
+
+  <select id="queryReplyListByComentId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    from hrl_comment_reply  where commentid = #{commentid,jdbcType=BIGINT}
+    ORDER BY crcreateTime asc
+  </select>
+
+
+</mapper>

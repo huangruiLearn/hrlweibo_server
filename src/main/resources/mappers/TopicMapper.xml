@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hrlweibo.dao.TopicMapper" >
+  <resultMap id="BaseResultMap" type="com.hrlweibo.pojo.Topic" >
+    <constructor >
+      <idArg column="topicid" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="topictype" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="topicdesc" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="topicread" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="topicdiscuss" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="topichost" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="topicattitude" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="topicimg" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="topicintro" jdbcType="VARCHAR" javaType="java.lang.String" />
+
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    topicid, topictype, topicdesc, topicread, topicdiscuss, topichost, topicattitude, 
+    topicimg,topicintro
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from hrl_weibo_topic
+    where topicid = #{topicid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from hrl_weibo_topic
+    where topicid = #{topicid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hrlweibo.pojo.Topic" >
+    insert into hrl_weibo_topic (topicid, topictype, topicdesc, 
+      topicread, topicdiscuss, topichost, 
+      topicattitude, topicimg)
+    values (#{topicid,jdbcType=BIGINT}, #{topictype,jdbcType=INTEGER}, #{topicdesc,jdbcType=VARCHAR}, 
+      #{topicread,jdbcType=BIGINT}, #{topicdiscuss,jdbcType=BIGINT}, #{topichost,jdbcType=VARCHAR}, 
+      #{topicattitude,jdbcType=INTEGER}, #{topicimg,jdbcType=VARCHAR}), #{topicintro,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hrlweibo.pojo.Topic" >
+    insert into hrl_weibo_topic
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="topicid != null" >
+        topicid,
+      </if>
+      <if test="topictype != null" >
+        topictype,
+      </if>
+      <if test="topicdesc != null" >
+        topicdesc,
+      </if>
+      <if test="topicread != null" >
+        topicread,
+      </if>
+      <if test="topicdiscuss != null" >
+        topicdiscuss,
+      </if>
+      <if test="topichost != null" >
+        topichost,
+      </if>
+      <if test="topicattitude != null" >
+        topicattitude,
+      </if>
+      <if test="topicimg != null" >
+        topicimg,
+      </if>
+      <if test="topicintro != null" >
+        topicintro,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="topicid != null" >
+        #{topicid,jdbcType=BIGINT},
+      </if>
+      <if test="topictype != null" >
+        #{topictype,jdbcType=INTEGER},
+      </if>
+      <if test="topicdesc != null" >
+        #{topicdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="topicread != null" >
+        #{topicread,jdbcType=BIGINT},
+      </if>
+      <if test="topicdiscuss != null" >
+        #{topicdiscuss,jdbcType=BIGINT},
+      </if>
+      <if test="topichost != null" >
+        #{topichost,jdbcType=VARCHAR},
+      </if>
+      <if test="topicattitude != null" >
+        #{topicattitude,jdbcType=INTEGER},
+      </if>
+      <if test="topicimg != null" >
+        #{topicimg,jdbcType=VARCHAR},
+      </if>
+      <if test="topicintro != null" >
+        #{topicintro,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hrlweibo.pojo.Topic" >
+    update hrl_weibo_topic
+    <set >
+      <if test="topictype != null" >
+        topictype = #{topictype,jdbcType=INTEGER},
+      </if>
+      <if test="topicdesc != null" >
+        topicdesc = #{topicdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="topicread != null" >
+        topicread = #{topicread,jdbcType=BIGINT},
+      </if>
+      <if test="topicdiscuss != null" >
+        topicdiscuss = #{topicdiscuss,jdbcType=BIGINT},
+      </if>
+      <if test="topichost != null" >
+        topichost = #{topichost,jdbcType=VARCHAR},
+      </if>
+      <if test="topicattitude != null" >
+        topicattitude = #{topicattitude,jdbcType=INTEGER},
+      </if>
+      <if test="topicimg != null" >
+        topicimg = #{topicimg,jdbcType=VARCHAR},
+      </if>
+      <if test="topicintro != null" >
+        topicintro = #{topicintro,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where topicid = #{topicid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hrlweibo.pojo.Topic" >
+    update hrl_weibo_topic
+    set topictype = #{topictype,jdbcType=INTEGER},
+      topicdesc = #{topicdesc,jdbcType=VARCHAR},
+      topicread = #{topicread,jdbcType=BIGINT},
+      topicdiscuss = #{topicdiscuss,jdbcType=BIGINT},
+      topichost = #{topichost,jdbcType=VARCHAR},
+      topicattitude = #{topicattitude,jdbcType=INTEGER},
+      topicimg = #{topicimg,jdbcType=VARCHAR}
+    topicintro = #{topicintro,jdbcType=VARCHAR}
+
+    where topicid = #{topicid,jdbcType=BIGINT}
+  </update>
+
+
+
+  <select id="selectTopicByTypeId"  resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    SELECT  <include refid="Base_Column_List" /> from hrl_weibo_topic  where topictype  =  #{topictype}
+  </select>
+
+
+
+</mapper>

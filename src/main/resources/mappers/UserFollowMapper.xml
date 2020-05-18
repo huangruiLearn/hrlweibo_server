@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hrlweibo.dao.UserFollowMapper" >
+  <resultMap id="BaseResultMap" type="com.hrlweibo.pojo.UserFollow" >
+    <constructor >
+      <idArg column="id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="focus_user_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="uid" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, focus_user_id, uid, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from hrl_user_follow
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from hrl_user_follow
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hrlweibo.pojo.UserFollow" >
+    insert into hrl_user_follow (id, focus_user_id, uid, 
+      create_time)
+    values (#{id,jdbcType=BIGINT}, #{focusUserId,jdbcType=BIGINT}, #{uid,jdbcType=BIGINT},
+    now())
+  </insert>
+  <insert id="insertSelective" parameterType="com.hrlweibo.pojo.UserFollow" >
+    insert into hrl_user_follow
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="focusUserId != null" >
+        focus_user_id,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="focusUserId != null" >
+        #{focusUserId,jdbcType=BIGINT},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hrlweibo.pojo.UserFollow" >
+    update hrl_user_follow
+    <set >
+      <if test="focusUserId != null" >
+        focus_user_id = #{focusUserId,jdbcType=BIGINT},
+      </if>
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hrlweibo.pojo.UserFollow" >
+    update hrl_user_follow
+    set focus_user_id = #{focusUserId,jdbcType=BIGINT},
+      uid = #{uid,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <select id="selectUserFollow" resultType="java.lang.Long" parameterType="java.lang.Long" >
+    select focus_user_id from hrl_user_follow where uid =  #{useid} order by create_time desc
+   </select>
+
+
+  <select id="selectUserFan"  resultType="java.lang.Long"  parameterType="java.lang.Long" >
+    select uid from hrl_user_follow where focus_user_id  =  #{useid} order by create_time desc
+  </select>
+
+
+  <select id="getFollowRelation" resultType="java.lang.Integer" parameterType="map" >
+     (SELECT 1 from hrl_user_follow where uid = #{userId} and focus_user_id = #{otheruserId} )
+    union all
+     (SELECT 2 from hrl_user_follow where uid = #{otheruserId} and focus_user_id = #{userId} )
+   </select>
+
+
+  <delete id="deleteRelation"   parameterType="map">
+    delete from hrl_user_follow   where uid = #{userId} and focus_user_id = #{otheruserId} </delete>
+
+  <select id="selectRelation" resultType="java.lang.Integer"   parameterType="map">
+    select count(*) from hrl_user_follow   where uid = #{userId} and focus_user_id = #{otheruserId} </select>
+
+
+
+</mapper>

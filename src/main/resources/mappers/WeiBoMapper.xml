@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hrlweibo.dao.WeiBoMapper" >
+  <resultMap id="BaseResultMap" type="com.hrlweibo.pojo.WeiBo" >
+    <constructor >
+      <idArg column="weibo_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="user_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="content" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="zhuanfa_num" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="like_num" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="comment_num" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="cat_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="vediourl" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="tail" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="is_zhunfa" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="zf_weiboid" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="pic1" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="pic2" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="pic3" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="pic4" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="pic5" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="pic6" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="pic7" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="pic8" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="pic9" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="createTime" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    weibo_id, user_id, content, zhuanfa_num, like_num, comment_num, cat_id,vediourl, tail,is_zhunfa,
+    zf_weiboid, pic1, pic2, pic3, pic4, pic5, pic6, pic7, pic8, pic9, createTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from hrl_weibo
+    where weibo_id = #{weiboId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from hrl_weibo
+    where weibo_id = #{weiboId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hrlweibo.pojo.WeiBo" >
+    insert into hrl_weibo (weibo_id, user_id, content, 
+      zhuanfa_num, like_num, comment_num, 
+      cat_id, vediourl, tail,is_zhunfa, zf_weiboid,
+      pic1, pic2, pic3, pic4, 
+      pic5, pic6, pic7, pic8, 
+      pic9, createTime)
+    values (#{weiboId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR}, 
+      #{zhuanfaNum,jdbcType=BIGINT}, #{likeNum,jdbcType=BIGINT}, #{commentNum,jdbcType=BIGINT}, 
+      #{catId,jdbcType=BIGINT}, #{vediourl,jdbcType=VARCHAR}, #{tail,jdbcType=VARCHAR}, #{isZhunfa,jdbcType=INTEGER}, #{zfWeiboid,jdbcType=BIGINT},
+      #{pic1,jdbcType=VARCHAR}, #{pic2,jdbcType=VARCHAR}, #{pic3,jdbcType=VARCHAR}, #{pic4,jdbcType=VARCHAR}, 
+      #{pic5,jdbcType=VARCHAR}, #{pic6,jdbcType=VARCHAR}, #{pic7,jdbcType=VARCHAR}, #{pic8,jdbcType=VARCHAR}, 
+      #{pic9,jdbcType=VARCHAR}, now())
+  </insert>
+  <insert id="insertSelective" parameterType="com.hrlweibo.pojo.WeiBo" >
+    insert into hrl_weibo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="weiboId != null" >
+        weibo_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="zhuanfaNum != null" >
+        zhuanfa_num,
+      </if>
+      <if test="likeNum != null" >
+        like_num,
+      </if>
+      <if test="commentNum != null" >
+        comment_num,
+      </if>
+      <if test="catId != null" >
+        cat_id,
+      </if>
+      <if test="vediourl != null" >
+        vediourl,
+      </if>
+      <if test="tail != null" >
+        tail,
+      </if>
+      <if test="isZhunfa != null" >
+        is_zhunfa,
+      </if>
+      <if test="zfWeiboid != null" >
+        zf_weiboid,
+      </if>
+      <if test="pic1 != null" >
+        pic1,
+      </if>
+      <if test="pic2 != null" >
+        pic2,
+      </if>
+      <if test="pic3 != null" >
+        pic3,
+      </if>
+      <if test="pic4 != null" >
+        pic4,
+      </if>
+      <if test="pic5 != null" >
+        pic5,
+      </if>
+      <if test="pic6 != null" >
+        pic6,
+      </if>
+      <if test="pic7 != null" >
+        pic7,
+      </if>
+      <if test="pic8 != null" >
+        pic8,
+      </if>
+      <if test="pic9 != null" >
+        pic9,
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="weiboId != null" >
+        #{weiboId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="zhuanfaNum != null" >
+        #{zhuanfaNum,jdbcType=BIGINT},
+      </if>
+      <if test="likeNum != null" >
+        #{likeNum,jdbcType=BIGINT},
+      </if>
+      <if test="commentNum != null" >
+        #{commentNum,jdbcType=BIGINT},
+      </if>
+      <if test="catId != null" >
+        #{catId,jdbcType=BIGINT},
+      </if>
+      <if test="vediourl != null" >
+        #{vediourl,jdbcType=VARCHAR},
+      </if>
+      <if test="tail != null" >
+        #{tail,jdbcType=VARCHAR},
+      </if>
+      <if test="isZhunfa != null" >
+        #{isZhunfa,jdbcType=INTEGER},
+      </if>
+      <if test="zfWeiboid != null" >
+        #{zfWeiboid,jdbcType=BIGINT},
+      </if>
+      <if test="pic1 != null" >
+        #{pic1,jdbcType=VARCHAR},
+      </if>
+      <if test="pic2 != null" >
+        #{pic2,jdbcType=VARCHAR},
+      </if>
+      <if test="pic3 != null" >
+        #{pic3,jdbcType=VARCHAR},
+      </if>
+      <if test="pic4 != null" >
+        #{pic4,jdbcType=VARCHAR},
+      </if>
+      <if test="pic5 != null" >
+        #{pic5,jdbcType=VARCHAR},
+      </if>
+      <if test="pic6 != null" >
+        #{pic6,jdbcType=VARCHAR},
+      </if>
+      <if test="pic7 != null" >
+        #{pic7,jdbcType=VARCHAR},
+      </if>
+      <if test="pic8 != null" >
+        #{pic8,jdbcType=VARCHAR},
+      </if>
+      <if test="pic9 != null" >
+        #{pic9,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hrlweibo.pojo.WeiBo" >
+    update hrl_weibo
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="zhuanfaNum != null" >
+        zhuanfa_num = #{zhuanfaNum,jdbcType=BIGINT},
+      </if>
+      <if test="likeNum != null" >
+        like_num = #{likeNum,jdbcType=BIGINT},
+      </if>
+      <if test="commentNum != null" >
+        comment_num = #{commentNum,jdbcType=BIGINT},
+      </if>
+      <if test="catId != null" >
+        cat_id = #{catId,jdbcType=BIGINT},
+      </if>
+      <if test="vediourl != null" >
+        #{vediourl,jdbcType=VARCHAR},
+      </if>
+      <if test="tail != null" >
+        #{tail,jdbcType=VARCHAR},
+      </if>
+      <if test="isZhunfa != null" >
+        is_zhunfa = #{isZhunfa,jdbcType=INTEGER},
+      </if>
+      <if test="zfWeiboid != null" >
+        zf_weiboid = #{zfWeiboid,jdbcType=BIGINT},
+      </if>
+      <if test="pic1 != null" >
+        pic1 = #{pic1,jdbcType=VARCHAR},
+      </if>
+      <if test="pic2 != null" >
+        pic2 = #{pic2,jdbcType=VARCHAR},
+      </if>
+      <if test="pic3 != null" >
+        pic3 = #{pic3,jdbcType=VARCHAR},
+      </if>
+      <if test="pic4 != null" >
+        pic4 = #{pic4,jdbcType=VARCHAR},
+      </if>
+      <if test="pic5 != null" >
+        pic5 = #{pic5,jdbcType=VARCHAR},
+      </if>
+      <if test="pic6 != null" >
+        pic6 = #{pic6,jdbcType=VARCHAR},
+      </if>
+      <if test="pic7 != null" >
+        pic7 = #{pic7,jdbcType=VARCHAR},
+      </if>
+      <if test="pic8 != null" >
+        pic8 = #{pic8,jdbcType=VARCHAR},
+      </if>
+      <if test="pic9 != null" >
+        pic9 = #{pic9,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where weibo_id = #{weiboId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hrlweibo.pojo.WeiBo" >
+    update hrl_weibo
+    set user_id = #{userId,jdbcType=BIGINT},
+      content = #{content,jdbcType=VARCHAR},
+      zhuanfa_num = #{zhuanfaNum,jdbcType=BIGINT},
+      like_num = #{likeNum,jdbcType=BIGINT},
+      comment_num = #{commentNum,jdbcType=BIGINT},
+      cat_id = #{catId,jdbcType=BIGINT},
+    vediourl = #{vediourl,jdbcType=VARCHAR},
+    tail = #{tail,jdbcType=VARCHAR},
+      is_zhunfa = #{isZhunfa,jdbcType=INTEGER},
+      zf_weiboid = #{zfWeiboid,jdbcType=BIGINT},
+      pic1 = #{pic1,jdbcType=VARCHAR},
+      pic2 = #{pic2,jdbcType=VARCHAR},
+      pic3 = #{pic3,jdbcType=VARCHAR},
+      pic4 = #{pic4,jdbcType=VARCHAR},
+      pic5 = #{pic5,jdbcType=VARCHAR},
+      pic6 = #{pic6,jdbcType=VARCHAR},
+      pic7 = #{pic7,jdbcType=VARCHAR},
+      pic8 = #{pic8,jdbcType=VARCHAR},
+      pic9 = #{pic9,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=TIMESTAMP}
+
+    where weibo_id = #{weiboId,jdbcType=BIGINT}
+
+  </update>
+
+
+
+  <insert id="insertZhuanFaWeiBo"   parameterType="com.hrlweibo.pojo.WeiBo" useGeneratedKeys="true" keyProperty= "weiboId" >
+    insert into hrl_weibo (  user_id, content,
+    is_zhunfa, zf_weiboid
+    ) values(  #{userId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR},
+    1, #{zfWeiboid,jdbcType=INTEGER})
+
+  </insert>
+
+  <select id="selectListByCatId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    SELECT
+    <include refid="Base_Column_List"/>
+    from hrl_weibo  where cat_id = #{catId,jdbcType=BIGINT}
+    ORDER BY weibo_id asc
+  </select>
+
+
+  <select id="selectListByZfId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    SELECT
+    <include refid="Base_Column_List"/>
+    from hrl_weibo  where zf_weiboid = #{weiboId,jdbcType=BIGINT}
+    ORDER BY weibo_id asc
+  </select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>

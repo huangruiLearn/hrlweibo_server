@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hrlweibo.dao.FeedBackMapper" >
+  <resultMap id="BaseResultMap" type="com.hrlweibo.pojo.FeedBack" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="content" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="userid" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="img1" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="img2" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="img3" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="img4" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="img5" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="img6" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="submittime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, content, userid, img1, img2, img3, img4, img5, img6, submittime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from hrl_feedback
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from hrl_feedback
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hrlweibo.pojo.FeedBack" >
+    insert into hrl_feedback (id, content, userid, 
+      img1, img2, img3, img4, 
+      img5, img6, submittime
+      )
+    values (#{id,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{userid,jdbcType=INTEGER}, 
+      #{img1,jdbcType=VARCHAR}, #{img2,jdbcType=VARCHAR}, #{img3,jdbcType=VARCHAR}, #{img4,jdbcType=VARCHAR}, 
+      #{img5,jdbcType=VARCHAR}, #{img6,jdbcType=VARCHAR}, #{submittime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hrlweibo.pojo.FeedBack" >
+    insert into hrl_feedback
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="img1 != null" >
+        img1,
+      </if>
+      <if test="img2 != null" >
+        img2,
+      </if>
+      <if test="img3 != null" >
+        img3,
+      </if>
+      <if test="img4 != null" >
+        img4,
+      </if>
+      <if test="img5 != null" >
+        img5,
+      </if>
+      <if test="img6 != null" >
+        img6,
+      </if>
+      <if test="submittime != null" >
+        submittime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="img1 != null" >
+        #{img1,jdbcType=VARCHAR},
+      </if>
+      <if test="img2 != null" >
+        #{img2,jdbcType=VARCHAR},
+      </if>
+      <if test="img3 != null" >
+        #{img3,jdbcType=VARCHAR},
+      </if>
+      <if test="img4 != null" >
+        #{img4,jdbcType=VARCHAR},
+      </if>
+      <if test="img5 != null" >
+        #{img5,jdbcType=VARCHAR},
+      </if>
+      <if test="img6 != null" >
+        #{img6,jdbcType=VARCHAR},
+      </if>
+      <if test="submittime != null" >
+        #{submittime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hrlweibo.pojo.FeedBack" >
+    update hrl_feedback
+    <set >
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="img1 != null" >
+        img1 = #{img1,jdbcType=VARCHAR},
+      </if>
+      <if test="img2 != null" >
+        img2 = #{img2,jdbcType=VARCHAR},
+      </if>
+      <if test="img3 != null" >
+        img3 = #{img3,jdbcType=VARCHAR},
+      </if>
+      <if test="img4 != null" >
+        img4 = #{img4,jdbcType=VARCHAR},
+      </if>
+      <if test="img5 != null" >
+        img5 = #{img5,jdbcType=VARCHAR},
+      </if>
+      <if test="img6 != null" >
+        img6 = #{img6,jdbcType=VARCHAR},
+      </if>
+      <if test="submittime != null" >
+        submittime = #{submittime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hrlweibo.pojo.FeedBack" >
+    update hrl_feedback
+    set content = #{content,jdbcType=VARCHAR},
+      userid = #{userid,jdbcType=INTEGER},
+      img1 = #{img1,jdbcType=VARCHAR},
+      img2 = #{img2,jdbcType=VARCHAR},
+      img3 = #{img3,jdbcType=VARCHAR},
+      img4 = #{img4,jdbcType=VARCHAR},
+      img5 = #{img5,jdbcType=VARCHAR},
+      img6 = #{img6,jdbcType=VARCHAR},
+      submittime = #{submittime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

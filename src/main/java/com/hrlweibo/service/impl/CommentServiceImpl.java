@@ -12,7 +12,7 @@ import com.hrlweibo.pojo.Comment;
 import com.hrlweibo.pojo.CommentReply;
 import com.hrlweibo.pojo.User;
 import com.hrlweibo.service.ICommentService;
-import com.hrlweibo.util.TxFileUtil;
+import com.hrlweibo.util.FileUtil;
 import com.hrlweibo.vo.CommentReplyVo;
 import com.hrlweibo.vo.CommentVo;
 import com.hrlweibo.vo.WeiBoListVo;
@@ -20,7 +20,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Service("ICommentService")
@@ -57,7 +56,7 @@ public class CommentServiceImpl implements ICommentService {
             CommentReplyVo mCommentReplyVo = new CommentReplyVo();
             User mUser = userMapper.selectByPrimaryKey(Integer.parseInt(mCommentReply.getCruserid() + ""));
             mCommentReplyVo.setFromuid(mCommentReply.getCruserid() + "");
-            mCommentReplyVo.setFromhead(TxFileUtil.baseTxUrl + mUser.getHeadurl() + "");
+            mCommentReplyVo.setFromhead(FileUtil.baseTxUrl + mUser.getHeadurl() + "");
             mCommentReplyVo.setFromuname(mUser.getNick() + "");
             mCommentReplyVo.setFromuserismember(mUser.getIsmember());
             mCommentReplyVo.setFromuserisvertify(mUser.getIsvertify());
@@ -126,7 +125,7 @@ public class CommentServiceImpl implements ICommentService {
             User mUserReply = userMapper.selectByPrimaryKey(Integer.parseInt(mCommentReplyList.get(i).getCruserid() + ""));
             mVo.setCrid(mCommentReplyList.get(i).getCrid() + "");
             mVo.setFromuid(mUserReply.getId() + "");
-            mVo.setFromhead(TxFileUtil.baseTxUrl + mUserReply.getHeadurl() + "");
+            mVo.setFromhead(FileUtil.baseTxUrl + mUserReply.getHeadurl() + "");
             mVo.setFromuname(mUserReply.getNick() + "");
             mVo.setFromuserismember(mUserReply.getIsmember());
             mVo.setFromuserisvertify(mUserReply.getIsvertify());
@@ -139,7 +138,7 @@ public class CommentServiceImpl implements ICommentService {
         mCommentVo.setCommentid(mComment.getCommentid() + "");
         mCommentVo.setWeiboid(mComment.getWeiboid() + "");
         mCommentVo.setFromuid(mComment.getUserid() + "");
-        mCommentVo.setFromhead(TxFileUtil.baseTxUrl + mUser.getHeadurl() + "");
+        mCommentVo.setFromhead(FileUtil.baseTxUrl + mUser.getHeadurl() + "");
         mCommentVo.setFromuname(mUser.getNick() + "");
         mCommentVo.setFromuserismember(mUser.getIsmember());
         mCommentVo.setFromuserisvertify(mUser.getIsvertify());

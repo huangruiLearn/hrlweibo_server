@@ -1,39 +1,25 @@
 package com.hrlweibo.service.impl;
 
 
-import cn.hutool.core.util.StrUtil;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.google.common.collect.Lists;
 import com.hrlweibo.common.ServerResponse;
 import com.hrlweibo.dao.FeedBackMapper;
 import com.hrlweibo.dao.UserFollowMapper;
 import com.hrlweibo.dao.UserMapper;
-import com.hrlweibo.dao.WeiBoMapper;
 import com.hrlweibo.pojo.FeedBack;
 import com.hrlweibo.pojo.User;
 import com.hrlweibo.pojo.UserFollow;
-import com.hrlweibo.pojo.WeiBo;
 import com.hrlweibo.service.IUserService;
-import com.hrlweibo.service.IWeiBoService;
 import com.hrlweibo.util.*;
 import com.hrlweibo.vo.*;
-import com.mysql.jdbc.StringUtils;
-import com.qcloud.cos.COSClient;
-import com.qcloud.cos.ClientConfig;
-import com.qcloud.cos.auth.BasicCOSCredentials;
-import com.qcloud.cos.auth.COSCredentials;
-import com.qcloud.cos.model.PutObjectRequest;
-import com.qcloud.cos.model.PutObjectResult;
-import com.qcloud.cos.region.Region;
-  import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service("iUserService")
@@ -68,7 +54,7 @@ public class UserServiceImpl implements IUserService {
         mUser.setNick(user.getNick() + "");
         mUser.setDecs(user.getDecs() + "");
         mUser.setGender(user.getGender() + "");
-        mUser.setHeadurl(TxFileUtil.baseTxUrl+user.getHeadurl() + "");
+        mUser.setHeadurl(FileUtil.baseTxUrl+user.getHeadurl() + "");
         mUser.setFanCount(user.getFanCount() + "");
         mUser.setFollowCount(user.getFollowCount() + "");
         mUser.setIsmember(user.getIsmember()  );
@@ -121,7 +107,7 @@ public class UserServiceImpl implements IUserService {
         mUser.setNick(user.getNick() + "");
         mUser.setDecs(user.getDecs() + "");
         mUser.setGender(user.getGender() + "");
-        mUser.setHeadurl(TxFileUtil.baseTxUrl+user.getHeadurl() + "");
+        mUser.setHeadurl(FileUtil.baseTxUrl+user.getHeadurl() + "");
         mUser.setFanCount(user.getFanCount() + "");
         mUser.setFollowCount(user.getFollowCount() + "");
         mUser.setIsmember(user.getIsmember()  );
@@ -195,10 +181,10 @@ public class UserServiceImpl implements IUserService {
         int year = cal.get(Calendar.YEAR);
         int month = cal.get(Calendar.MONTH)+1;
         int day = cal.get(Calendar.DATE);
-        String  mFileNmae=TxFileUtil. saveFileToLoacle(mFile);
+        String  mFileNmae= FileUtil. saveFileToLoacle(mFile);
         int updateCount = userMapper.updateUserHeadByPrimaryKey(mFileNmae,userId);
         if(updateCount > 0){
-            return ServerResponse.createBySuccess(TxFileUtil.baseTxUrl+mFileNmae);
+            return ServerResponse.createBySuccess(FileUtil.baseTxUrl+mFileNmae);
         }else {
             return ServerResponse.createByErrorMessage("上传失败");
         }
@@ -207,10 +193,10 @@ public class UserServiceImpl implements IUserService {
             mFile.transferTo(localFile);
             // 指定要上传到 COS 上的路径
             String key = year + "" + month + "" + day + "" + newFileName;
-            if (TxFileUtil.upload(key, localFile)) {
+            if (FileUtil.upload(key, localFile)) {
                 int updateCount = userMapper.updateUserHeadByPrimaryKey(key,userId);
                 if(updateCount > 0){
-                    return ServerResponse.createBySuccess(TxFileUtil.baseTxUrl+key);
+                    return ServerResponse.createBySuccess(FileUtil.baseTxUrl+key);
                 }else {
                     return ServerResponse.createByErrorMessage("上传失败");
                 }
@@ -259,7 +245,7 @@ public class UserServiceImpl implements IUserService {
             mFollowUser.setId(mUser.getId() + "");
             mFollowUser.setNick(mUser.getNick() + "");
             mFollowUser.setDecs(mUser.getDecs() + "");
-            mFollowUser.setHeadurl(TxFileUtil.baseTxUrl+mUser.getHeadurl() + "");
+            mFollowUser.setHeadurl(FileUtil.baseTxUrl+mUser.getHeadurl() + "");
             List<Integer>  mRelationInt=  userFollowMapper.getFollowRelation(userId+"",mUser.getId());
             //https://blog.csdn.net/u013107634/article/details/89488163
             if ( mRelationInt.contains(1) && mRelationInt.contains(2)) {
@@ -296,7 +282,7 @@ public class UserServiceImpl implements IUserService {
             mFollowUser.setId(mUser.getId() + "");
             mFollowUser.setNick(mUser.getNick() + "");
             mFollowUser.setDecs(mUser.getDecs() + "");
-            mFollowUser.setHeadurl(TxFileUtil.baseTxUrl+mUser.getHeadurl() + "");
+            mFollowUser.setHeadurl(FileUtil.baseTxUrl+mUser.getHeadurl() + "");
             System.out.println("用户1是:"+userId+"------"+"用户2是:"+mUser.getId()+"");
             List<Integer>  mRelationInt=  userFollowMapper.getFollowRelation(userId+"",mUser.getId());
             //https://blog.csdn.net/u013107634/article/details/89488163
@@ -332,7 +318,7 @@ public class UserServiceImpl implements IUserService {
             mFollowUser.setId(mUser.getId() + "");
             mFollowUser.setNick(mUser.getNick() + "");
             mFollowUser.setDecs(mUser.getDecs() + "");
-            mFollowUser.setHeadurl(TxFileUtil.baseTxUrl+mUser.getHeadurl() + "");
+            mFollowUser.setHeadurl(FileUtil.baseTxUrl+mUser.getHeadurl() + "");
             List<Integer>  mRelationInt=  userFollowMapper.getFollowRelation(userId+"",mUser.getId());
             //https://blog.csdn.net/u013107634/article/details/89488163
             if ( mRelationInt.contains(1) && mRelationInt.contains(2)) {

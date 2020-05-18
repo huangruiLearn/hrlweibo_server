@@ -1,6 +1,6 @@
 package com.hrlweibo.pojo;
 
-import com.hrlweibo.util.TxFileUtil;
+import com.hrlweibo.util.FileUtil;
 
 public class FindKind {
     private Integer id;
@@ -36,7 +36,7 @@ public class FindKind {
     }
 
     public String getImg() {
-        return TxFileUtil.baseTxUrl+img;
+        return FileUtil.baseTxUrl+img;
     }
 
     public void setImg(String img) {

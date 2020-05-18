@@ -3,23 +3,16 @@ package com.hrlweibo.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.google.common.collect.Lists;
 import com.hrlweibo.common.ServerResponse;
 import com.hrlweibo.dao.UserMapper;
 import com.hrlweibo.dao.VedioCategoryMapper;
 import com.hrlweibo.dao.VideoMapper;
-import com.hrlweibo.dao.WeiBoMapper;
 import com.hrlweibo.pojo.User;
 import com.hrlweibo.pojo.VedioCategory;
 import com.hrlweibo.pojo.Video;
-import com.hrlweibo.pojo.WeiBo;
-import com.hrlweibo.service.IWeiBoService;
 import com.hrlweibo.service.IWeiBoVedioService;
-import com.hrlweibo.util.TxFileUtil;
+import com.hrlweibo.util.FileUtil;
 import com.hrlweibo.vo.VideoVo;
-import com.hrlweibo.vo.WeiBoListVo;
-import com.hrlweibo.vo.WeiBoUserVo;
-import com.mysql.jdbc.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -72,7 +65,7 @@ public class IWeiBoVedioServiceImpl implements IWeiBoVedioService {
 
             mVo.setUsername(mUser.getNick() + "");
             mVo.setUserisvertify(mUser.getIsmember());
-            mVo.setUserheadurl(TxFileUtil.baseTxUrl + mUser.getHeadurl());
+            mVo.setUserheadurl(FileUtil.baseTxUrl + mUser.getHeadurl());
             mVo.setUserfancount(mUser.getFanCount());
             mVo.setUserdesc(mUser.getDecs());
             mVideoVoList.add(mVo);

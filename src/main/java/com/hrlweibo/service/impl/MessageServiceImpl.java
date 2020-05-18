@@ -1,7 +1,6 @@
 package com.hrlweibo.service.impl;
 
 
-import com.github.pagehelper.Constant;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
@@ -15,7 +14,7 @@ import com.hrlweibo.pojo.User;
 import com.hrlweibo.pojo.WeiBo;
 import com.hrlweibo.pojo.Zan;
 import com.hrlweibo.service.IMessageService;
-import com.hrlweibo.util.TxFileUtil;
+import com.hrlweibo.util.FileUtil;
 import com.hrlweibo.vo.MessageZanCommentVo;
 import org.apache.http.util.TextUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +47,7 @@ public class MessageServiceImpl implements IMessageService {
             User mUser = userMapper.selectByPrimaryKey(Integer.parseInt(mZan.getUserid() + ""));
             mVo.setUserid(mZan.getUserid() + "");
             mVo.setUsername(mUser.getNick() + "");
-            mVo.setUserheadurl(TxFileUtil.baseTxUrl + mUser.getHeadurl() + "");
+            mVo.setUserheadurl(FileUtil.baseTxUrl + mUser.getHeadurl() + "");
             mVo.setCreatetime(mZan.getCreatetime());
             mVo.setIsmember(mUser.getIsmember());
             mVo.setTail(mZan.getTail());
@@ -93,7 +92,7 @@ public class MessageServiceImpl implements IMessageService {
             User mUser = userMapper.selectByPrimaryKey(Integer.parseInt(mZan.getUserid() + ""));
             mVo.setUserid(mZan.getUserid() + "");
             mVo.setUsername(mUser.getNick() + "");
-            mVo.setUserheadurl(TxFileUtil.baseTxUrl + mUser.getHeadurl() + "");
+            mVo.setUserheadurl(FileUtil.baseTxUrl + mUser.getHeadurl() + "");
             mVo.setCreatetime(mZan.getCreatetime());
             mVo.setIsmember(mUser.getIsmember());
             mVo.setTail(mZan.getTail());

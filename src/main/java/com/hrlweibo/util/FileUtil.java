@@ -28,17 +28,17 @@ import java.util.concurrent.Executors;
 
 //https://cloud.tencent.com/document/product/436/6273
 //https://cloud.tencent.com/document/product/436/10199
-public class TxFileUtil {
+public class FileUtil {
 
 
-    static String bucketName = "hrlweibo"; //桶的名称
-    static String region = "ap-beijing";//区域北京则  beijing
+    static String bucketName = ""; //桶的名称
+    static String region = "";//区域北京则  beijing
     static COSCredentials cred = null;
     static TransferManager transferManager = null;
     static COSClient cosClient = null;
-    static long appId = 1259131655;
-    static String secretId = "AKID60f5FCUxjFYFhtvT3OTijX4NR2Qb4VUD";
-    static String secretKey = "d0HIxe7LJgHOjogJhpSpwc37wXtlKyNm";
+    static long appId = 0;
+    static String secretId = "";
+    static String secretKey = "";
 
     //   public static String baseTxUrl = "https://" + bucketName + "-" + appId + ".cos.ap-beijing.myqcloud.com/";
     // public static String baseTxUrl = "http://192.168.56.1:8080/hrlweibo/file/";

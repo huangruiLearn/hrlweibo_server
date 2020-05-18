@@ -1,15 +1,12 @@
 package com.hrlweibo.service.impl;
 
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
 import com.hrlweibo.common.ServerResponse;
 import com.hrlweibo.dao.*;
 import com.hrlweibo.pojo.*;
-import com.hrlweibo.service.ICommentService;
 import com.hrlweibo.service.IFindService;
-import com.hrlweibo.util.TxFileUtil;
+import com.hrlweibo.util.FileUtil;
 import com.hrlweibo.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -157,7 +154,7 @@ public class FindServiceImpl implements IFindService {
             TopicVo mTopicVo = new TopicVo();
             mTopicVo.setTopictype(mTopicList.get(i).getTopictype() + "");
             mTopicVo.setTopicread(mTopicList.get(i).getTopicread() + "");
-            mTopicVo.setTopicimg(TxFileUtil.baseTxUrl + mTopicList.get(i).getTopicimg() + "");
+            mTopicVo.setTopicimg(FileUtil.baseTxUrl + mTopicList.get(i).getTopicimg() + "");
             mTopicVo.setTopichost(mTopicList.get(i).getTopichost() + "");
             mTopicVo.setTopicdiscuss(mTopicList.get(i).getTopicdiscuss() + "");
             mTopicVo.setTopicdesc(mTopicList.get(i).getTopicdesc() + "");

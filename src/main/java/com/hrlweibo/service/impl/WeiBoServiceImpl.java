@@ -8,7 +8,7 @@ import com.hrlweibo.common.ServerResponse;
 import com.hrlweibo.dao.*;
 import com.hrlweibo.pojo.*;
 import com.hrlweibo.service.IWeiBoService;
-import com.hrlweibo.util.TxFileUtil;
+import com.hrlweibo.util.FileUtil;
 import com.hrlweibo.vo.*;
 import com.mysql.jdbc.StringUtils;
 import org.apache.http.util.TextUtils;
@@ -74,7 +74,7 @@ public class WeiBoServiceImpl implements IWeiBoService {
               User mUser= userMapper.selectByPrimaryKey(Integer.parseInt(mZfWeiBoList.get(i).getUserid()+""));
               mVo.setZfid(mZfWeiBoList.get(i).getForwardid()+"");
               mVo.setFromuid(mZfWeiBoList.get(i).getUserid()+"");
-              mVo.setFromhead(TxFileUtil.baseTxUrl+mUser.getHeadurl()+"");
+              mVo.setFromhead(FileUtil.baseTxUrl+mUser.getHeadurl()+"");
               mVo.setFromuname(mUser.getNick()+"");
               mVo.setFromuserismember(mUser.getIsmember());
               mVo.setFromuserisvertify(mUser.getIsvertify());
@@ -111,7 +111,7 @@ public class WeiBoServiceImpl implements IWeiBoService {
             User mUser= userMapper.selectByPrimaryKey(Integer.parseInt(mZfWeiBoList.get(i).getUserid()+""));
             mVo.setZfid(mZfWeiBoList.get(i).getForwardid()+"");
             mVo.setFromuid(mZfWeiBoList.get(i).getUserid()+"");
-            mVo.setFromhead(TxFileUtil.baseTxUrl+mUser.getHeadurl()+"");
+            mVo.setFromhead(FileUtil.baseTxUrl+mUser.getHeadurl()+"");
             mVo.setFromuname(mUser.getNick()+"");
             mVo.setFromuserismember(mUser.getIsmember());
             mVo.setFromuserisvertify(mUser.getIsvertify());
@@ -169,7 +169,7 @@ public class WeiBoServiceImpl implements IWeiBoService {
     //发布微博
     @Override
     public ServerResponse  publishWeiBo(int userid, String content, MultipartFile[] multipartFile) {
-        ArrayList<String> mListUrls=TxFileUtil. saveFileToLoacle(multipartFile);
+        ArrayList<String> mListUrls= FileUtil. saveFileToLoacle(multipartFile);
 
         WeiBo mWeiBo=new WeiBo();
         mWeiBo.setUserId(Long.parseLong(userid+""));
@@ -296,7 +296,7 @@ public class WeiBoServiceImpl implements IWeiBoService {
             mFollowUser.setId(mUser.getId() + "");
             mFollowUser.setNick(mUser.getNick() + "");
             mFollowUser.setDecs(mUser.getDecs() + "");
-            mFollowUser.setHeadurl(TxFileUtil.baseTxUrl+mUser.getHeadurl() + "");
+            mFollowUser.setHeadurl(FileUtil.baseTxUrl+mUser.getHeadurl() + "");
             mUserListHot.add(mFollowUser);
          }
 
@@ -306,7 +306,7 @@ public class WeiBoServiceImpl implements IWeiBoService {
             mFollowUser.setId(mUser.getId() + "");
             mFollowUser.setNick(mUser.getNick() + "");
             mFollowUser.setDecs(mUser.getDecs() + "");
-            mFollowUser.setHeadurl(TxFileUtil.baseTxUrl+mUser.getHeadurl() + "");
+            mFollowUser.setHeadurl(FileUtil.baseTxUrl+mUser.getHeadurl() + "");
             mUserListCommon.add(mFollowUser);
         }
         mAtUsers.setHotusers(mUserListHot);
@@ -339,7 +339,7 @@ public class WeiBoServiceImpl implements IWeiBoService {
             mVo.setTopicdesc(mAllTopic.get(i).getTopicdesc()+"");
             mVo.setTopicdiscuss(mAllTopic.get(i).getTopicdiscuss()+"");
             mVo.setTopichost(mAllTopic.get(i).getTopichost()+"");
-            mVo.setTopicimg(TxFileUtil.baseTxUrl+mAllTopic.get(i).getTopicimg()+"");
+            mVo.setTopicimg(FileUtil.baseTxUrl+mAllTopic.get(i).getTopicimg()+"");
             mVo.setTopicread(mAllTopic.get(i).getTopicread()+"");
             mVo.setTopictype(mAllTopic.get(i).getTopictype()+"");
             mAllTopicVo.add(mVo);
@@ -360,7 +360,7 @@ public class WeiBoServiceImpl implements IWeiBoService {
         WeiBoUserVo mUser=new WeiBoUserVo();
         mUser.setId(mDbUser.getId());
         mUser.setDecs(mDbUser.getDecs());
-        mUser.setHeadurl(TxFileUtil.baseTxUrl+mDbUser.getHeadurl());
+        mUser.setHeadurl(FileUtil.baseTxUrl+mDbUser.getHeadurl());
         mUser.setNick(mDbUser.getNick());
         mUser.setIsmember(mDbUser.getIsmember());
         mUser.setIsvertify(mDbUser.getIsvertify());
@@ -378,7 +378,7 @@ public class WeiBoServiceImpl implements IWeiBoService {
         productListVo.setCommentNum(product.getCommentNum());
 
         if (!TextUtils.isEmpty(product.getVediourl())){
-            productListVo.setVediourl(TxFileUtil.baseTxUrl+product.getVediourl()+"");
+            productListVo.setVediourl(FileUtil.baseTxUrl+product.getVediourl()+"");
         }else {
             productListVo.setVediourl(product.getVediourl()+"");
         }
@@ -404,7 +404,7 @@ public class WeiBoServiceImpl implements IWeiBoService {
             productListVo.setZfPicurl(getPicList(mZfWeiBo));
 
              if (!TextUtils.isEmpty(mZfWeiBo.getVediourl())){
-                 productListVo.setZfVedioUrl(TxFileUtil.baseTxUrl+mZfWeiBo.getVediourl()+"");
+                 productListVo.setZfVedioUrl(FileUtil.baseTxUrl+mZfWeiBo.getVediourl()+"");
 
              }else {
                  productListVo.setZfVedioUrl(mZfWeiBo.getVediourl()+"");

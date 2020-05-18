@@ -1,6 +1,6 @@
 package com.hrlweibo.vo;
 
-import com.hrlweibo.util.TxFileUtil;
+import com.hrlweibo.util.FileUtil;
 
 public class FindHotSearchVo {
 
@@ -79,7 +79,7 @@ public class FindHotSearchVo {
     }
 
     public String getRecommendcoverimg() {
-        return TxFileUtil.baseTxUrl+recommendcoverimg;
+        return FileUtil.baseTxUrl+recommendcoverimg;
     }
 
     public void setRecommendcoverimg(String recommendcoverimg) {

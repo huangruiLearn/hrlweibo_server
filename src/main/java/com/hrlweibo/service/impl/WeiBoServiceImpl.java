@@ -254,7 +254,7 @@ public class WeiBoServiceImpl implements IWeiBoService {
         if (result == 0) {
             return  ServerResponse.createByErrorMessage("发布失败");
         }
-        return  ServerResponse.createBySuccess("发布成功:"+mListUrls.get(0));
+        return  ServerResponse.createBySuccess("发布成功");
 
     }
 
